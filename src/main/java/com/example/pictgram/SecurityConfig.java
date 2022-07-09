@@ -45,12 +45,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		//@formatter:off
+		/* 記述誤りの箇所：改行により修飾が違うアドレスに適用
 		http.authorizeRequests().antMatchers("/login", "/logout-complete", "users/new", "/user")
 			.permitAll().anyRequest().authenticated()
 			//ログアウト処理
 			.and().logout().logoutUrl("/logout").logoutSuccessUrl("/logout-complete").clearAuthentication(true)
 			.deleteCookies("JSESSIONID").invalidateHttpSession(true).permitAll()
 			.and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+			//form
+			.and().formLogin().loginPage("/login").defaultSuccessUrl("/topics").failureUrl("/login-failure")
+			.permitAll();
+			*/
+		http.authorizeRequests().antMatchers("/login", "/logout-complete", "users/new", "/user").permitAll()//特に制限なし
+			//.anyRequest().authenticated()//ログイン済みに制限
+			//ログアウト処理
+			.and().logout().logoutUrl("/logout").logoutSuccessUrl("/logout-complete").clearAuthentication(true)
+			.deleteCookies("JSESSIONID")
+			.invalidateHttpSession(true).permitAll().and().csrf()
+			.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
 			//form
 			.and().formLogin().loginPage("/login").defaultSuccessUrl("/topics").failureUrl("/login-failure")
 			.permitAll();
