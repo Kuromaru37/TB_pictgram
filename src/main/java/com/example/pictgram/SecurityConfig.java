@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	private FormAuthenticationProvider authenticationProvider;
 	
 	private static final String[] URLSOTHER = {
-			"/css/**", "/images/**", "/scripts/**", "/h2-console"
+			"/css/**", "/images/**", "/scripts/**" //, "/h2-console/**"
 	};
 	
 	//認証からの除外
@@ -56,8 +56,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.and().formLogin().loginPage("/login").defaultSuccessUrl("/topics").failureUrl("/login-failure")
 			.permitAll();
 			*/
-		http.authorizeRequests().antMatchers("/login", "/logout-complete", "users/new", "/user").permitAll()//特に制限なし
-			//.anyRequest().authenticated()//ログイン済みに制限
+		http.authorizeRequests().antMatchers("/", "/login", "/logout-complete", "/users/new", "/user", "/h2-console/**").permitAll()//特に制限なし
+			.anyRequest().authenticated()//ログイン済みに制限
 			//ログアウト処理
 			.and().logout().logoutUrl("/logout").logoutSuccessUrl("/logout-complete").clearAuthentication(true)
 			.deleteCookies("JSESSIONID")
