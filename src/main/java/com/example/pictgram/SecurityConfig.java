@@ -66,6 +66,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			//form
 			.and().formLogin().loginPage("/login").defaultSuccessUrl("/topics").failureUrl("/login-failure")
 			.permitAll();
+		//追記(for h2-console-usage-only
+		//http.headers().frameOptions().disable();
 			//@formatter:on
 		//Configメソッドの記述は、フォーマット機能をオフにすること！！
 	}
