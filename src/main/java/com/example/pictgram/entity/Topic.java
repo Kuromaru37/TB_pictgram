@@ -46,7 +46,7 @@ public class Topic extends AbstractEntity implements Serializable {
 	
 	@ManyToOne
 	@OneToOne
-	@JoinColumn(name = "useId", insertable = false, updatable = false)
+	@JoinColumn(name = "userId", insertable = false, updatable = false)
 	private User user;
 
 	

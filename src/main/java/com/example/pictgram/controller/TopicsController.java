@@ -62,7 +62,7 @@ public class TopicsController {
 	@Autowired
 	private HttpServletRequest request;
 	
-	@Value("${image.local:false}") //教材２７以降s3を実装予定：trueをfalseへじ後更新 (更新)
+	@Value("${image.local:false}") //教材２７以降s3を実装予定：仮のtrueをfalseへじ後更新 (更新)
 	private String imageLocal;
 	
 	@Value("${AWS_BUCKET}")

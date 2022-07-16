@@ -55,8 +55,7 @@ public class S3Wrapper {
 		return putObjectResult;
 	}
 	
-	public List<PutObjectResult>
-	upload(MultipartFile[] multipartFiles) {
+	public List<PutObjectResult> upload(MultipartFile[] multipartFiles) {
 		
 		List<PutObjectResult> putObjectResults = new ArrayList<>();
 		
