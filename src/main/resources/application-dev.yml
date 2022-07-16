@@ -22,7 +22,6 @@ spring:
   
 image:
   local: true
-    
-    
+
   
 debug: true

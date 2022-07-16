@@ -43,6 +43,7 @@ import com.example.pictgram.form.FavoriteForm;
 import com.example.pictgram.form.TopicForm;
 import com.example.pictgram.form.UserForm;
 import com.example.pictgram.repository.TopicRepository;
+import com.example.pictgram.service.S3Wrapper;
 
 @Controller
 public class TopicsController {
@@ -61,8 +62,17 @@ public class TopicsController {
 	@Autowired
 	private HttpServletRequest request;
 	
-	@Value("${image.local:true}") //教材２７以降s3を実装予定：trueをfalseへじ後更新
+	@Value("${image.local:false}") //教材２７以降s3を実装予定：trueをfalseへじ後更新 (更新)
 	private String imageLocal;
+	
+	@Value("${AWS_BUCKET}")
+	private String awsBucket;
+	
+	@Value("${AWS_DEFAULT_REGION}")
+	private String awsDefaultRegion;
+	
+	@Autowired
+	S3Wrapper s3;
 	
 	@GetMapping(path = "/topics")
 	public String index(Principal principal, Model model) throws IOException {
@@ -196,6 +206,12 @@ public class TopicsController {
 		entity.setDescription(form.getDescription());
 		repository.saveAndFlush(entity);
 		
+		if (!isImageLocal) {
+			String url = saveImageS3(image, entity);
+			entity.setPath(url);
+			repository.saveAndFlush(entity);
+		}
+		
 		redirAttrs.addFlashAttribute("hasMessage", true);
 		redirAttrs.addFlashAttribute("class", "alert-info");
 		//redirAttrs.addFlashAttribute("message", "投稿に成功しました。");
@@ -221,4 +237,17 @@ public class TopicsController {
 		
 		return destFile;
 	}
+	
+	private String saveImageS3(MultipartFile image, Topic entity) throws IOException {
+		
+		String path = "uploads/topic/image/" + entity.getId() + "/" + image.getOriginalFilename();
+		s3.upload(image.getInputStream(), path);
+		String fileName = image.getOriginalFilename();  //使ってない。書く順番は？
+		File destFile = File.createTempFile("s3_", ".tmp");
+		image.transferTo(destFile);
+		String url = "https://" + awsBucket + ".s3-" + awsDefaultRegion + ".amazonaws.com/" + path;
+		
+		return url;
+	}
+	
 } 
