@@ -224,13 +224,11 @@ public class TopicsController {
 		
 		File uploadDir = new File("/uploads");
 		uploadDir.mkdir();
-		
 		String uploadsDir = "/uploads/";
 		String realPathToUploads = request.getServletContext().getRealPath(uploadsDir);
 		if (!new File(realPathToUploads).exists()) {
 			new File(realPathToUploads).mkdir();
 		}
-		
 		String fileName = image.getOriginalFilename();
 		File destFile = new File(realPathToUploads, fileName);
 		image.transferTo(destFile);
