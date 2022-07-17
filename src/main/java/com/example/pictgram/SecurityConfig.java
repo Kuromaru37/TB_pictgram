@@ -31,14 +31,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private FormAuthenticationProvider authenticationProvider;
 	
-	private static final String[] URLSOTHER = {
-			"/css/**", "/images/**", "/scripts/**" //, "/h2-console/**"
+	private static final String[] URLS = {
+			"/css/**", "/images/**", "/scripts/**", "/h2-console/**", "/favicon.ico"
 	};
 	
 	//認証からの除外
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers(URLSOTHER);
+		web.ignoring().antMatchers(URLS);
 	}
 	
 	//認証の設定
@@ -56,7 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.and().formLogin().loginPage("/login").defaultSuccessUrl("/topics").failureUrl("/login-failure")
 			.permitAll();
 			*/
-		http.authorizeRequests().antMatchers("/", "/login", "/logout-complete", "/users/new", "/user", "/h2-console/**").permitAll()//特に制限なし
+		http.authorizeRequests().antMatchers("/", "/login", "/logout-complete", "/users/new", "/user").permitAll()//特に制限なし
 			.anyRequest().authenticated()//ログイン済みに制限
 			//ログアウト処理
 			.and().logout().logoutUrl("/logout").logoutSuccessUrl("/logout-complete").clearAuthentication(true)
