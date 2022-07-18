@@ -23,7 +23,5 @@ cloud:
       auto: false
       static: ap-northeast-1
 
-onesignal:
-  id: ${onesignal.id}
-  
+
 debug: true
