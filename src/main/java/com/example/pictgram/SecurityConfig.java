@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	private FormAuthenticationProvider authenticationProvider;
 	
 	private static final String[] URLS = {
-			"/css/**", "/images/**", "/scripts/**", "/h2-console/**", "/favicon.ico"
+			"/css/**", "/images/**", "/scripts/**", "/h2-console/**", "/favicon.ico", "/OneSignalSDKWorker.js"
 	};
 	
 	//認証からの除外
