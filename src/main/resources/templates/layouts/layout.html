@@ -29,12 +29,14 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script src="/scripts/method-convert.js" th:src="@{/scripts/method-convert.js}"></script>
 		<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-			<!--	<script th:inline=javascript> *[[${@environment.getProperty('onesignal.id')}]]*/,  -->
+			<!--	<script th:inline="javascript"> [[${@environment.getProperty('onesignal.id')}]], 
+			注意！！　JavaScript でインラインをする際は、/* */で囲む必要がある。 -->
+			<!--    <script>  appId: "7b283468-4e23-49be-a9b5-86915fb965be", -->
 		<script>
   			window.OneSignal = window.OneSignal || [];
   			OneSignal.push(function() {
     			OneSignal.init({
-      				appId: "7b283468-4e23-49be-a9b5-86915fb965be",
+    				appId: "7b283468-4e23-49be-a9b5-86915fb965be", 
     			});
   			});
 		</script>

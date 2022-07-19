@@ -4,9 +4,26 @@
 	layout:decorate="~{layouts/layout}">
 	<head>
 		<title>Pictgram教材(Topics.index)</title>
+		<style type="text/css">
+			.map { height: 100%;}
+		</style>
 	</head>	
 	<body>
 		<div class="topics-index-wrapper" layout:fragment="contents">
+			<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+			<script src="|https://maps.googleapis.com/maps/api/js?key=${@environment.getProperty('googlemap.key')}&callback=initMap&livraries=&v=weekly|" ></script>
+			<script th:inline="javascript">
+				function initMap() {
+					/* [# th:each="topic : ${list}"] */
+					/* [# th:if="${topic.latitude != null and topic.longitude != null}"] */
+						new google.maps.Map(document.getElementById("map[[${topic.id}]]"), {
+							center: { lat: [[${topic.latitude}]], lng: [[${topic.longitude}]] },
+							zoom: 16,
+						});
+					/*[/]*/
+					/*[/]*/
+				}
+			</script>
 			<div class="container">
 				<div class="row" th:each="topic : ${list}">
 					<a th:id="${topic.id}"></a>
@@ -35,6 +52,10 @@
 								</a>
 							</div>
 							<pre class="description" th:text="${topic.description}"></pre>
+							<!-- マップ機能の追加 -->
+							<div style="height: 320px" th:if="${topic.latitude != null and ${topic.longitude} != null}">
+								<div class="map" id="|map${topic.id}|"></div>
+							</div>
 							<div class="comments">
 								<h3 class='text-center' th:text="#{topics.index.comment}">コメント</h3>
 								<ul th:each="comment : ${topic.comments}">
@@ -48,3 +69,4 @@
 		</div>
 	</body>
 </html>
+
