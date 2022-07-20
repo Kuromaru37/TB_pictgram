@@ -199,7 +199,8 @@ public class TopicsController {
 			model.addAttribute("hasMessage", true);
 			model.addAttribute("class", "alert-danger");
 			//model.addAttribute("message", "投稿に失敗しました。");
-			model.addAttribute("message", messageSource.getMessage("topics.create.flash.1", new String[] {}, locale));
+			model.addAttribute("message", messageSource.getMessage("topics.create.flash.1", 
+					new String[] {}, locale));
 			return "topics/new";
 		}
 		
@@ -233,7 +234,8 @@ public class TopicsController {
 		redirAttrs.addFlashAttribute("hasMessage", true);
 		redirAttrs.addFlashAttribute("class", "alert-info");
 		//redirAttrs.addFlashAttribute("message", "投稿に成功しました。");
-		redirAttrs.addFlashAttribute("message", messageSource.getMessage("topics.create.flash.2", new String[] {}, locale));
+		redirAttrs.addFlashAttribute("message", messageSource.getMessage("topics.create.flash.2", 
+				new String[] {}, locale));
 		
 		Context context = new Context();
 		context.setVariable("title", "【TBPictgram】新規投稿");
@@ -297,7 +299,8 @@ public class TopicsController {
 		
 	}
 	
-	private void setGeoInfo(Topic entity, Metadata metadata, BufferedInputStream inputStream, File destFile, String fileName) {
+	private void setGeoInfo(Topic entity, Metadata metadata, BufferedInputStream inputStream, 
+			File destFile, String fileName) {
 		
 		if (log.isDebugEnabled()) {
 			for (Directory directory : metadata.getDirectories()) {
