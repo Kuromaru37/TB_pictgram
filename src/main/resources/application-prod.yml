@@ -40,6 +40,9 @@ cloud:
       auto: false
       static: ap-northeast-1
 
+onesignal: 
+  id: ${onesignal.id} 
+
 googlemap:
   key: ${googlemap.key} 
 

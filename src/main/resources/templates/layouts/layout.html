@@ -14,6 +14,10 @@
 		<link rel="stylesheet" 
 			href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
 		<link rel="stylesheet" href="/css.style.css" th:href="@{/css/style.css}">
+		<script src="https://kit.fontawesome.com/251140271f.js" crossorigin="anonymous"></script>
+		<link rel="stylesheet" 
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.0.10/font-awesome-animation.css"
+			type="text/css" media="all" />
 		<title>Pictgram(レイアウト)</title>
 	</head>
 	<body>
@@ -32,11 +36,11 @@
 			<!--	<script th:inline="javascript"> [[${@environment.getProperty('onesignal.id')}]], 
 			注意！！　JavaScript でインラインをする際は、/* */で囲む必要がある。 -->
 			<!--    <script>  appId: "7b283468-4e23-49be-a9b5-86915fb965be", -->
-		<script>
+		<script th:inline="javascript">
   			window.OneSignal = window.OneSignal || [];
   			OneSignal.push(function() {
     			OneSignal.init({
-    				appId: "7b283468-4e23-49be-a9b5-86915fb965be", 
+    				appId: /*[[${@environment.getProperty('onesignal.id')}]]*/ "7b283468-4e23-49be-a9b5-86915fb965be", 
     			});
   			});
 		</script>
