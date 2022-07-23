@@ -132,4 +132,29 @@ nav.navbar {
   color: #337ab7;
   text-decoration: none; }
 
+html {
+  position: relative;
+  min-height: 100%; }
+
+body {
+  margin-bottom: 180px; }
+
+.footer {
+  background-color: lightyellow;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  height: 180px;
+  padding: 10px 0; }
+  .footer .row {
+    visibility: hidden; }
+
+.footer:hover {
+  background-color: lightgreen; }
+  .footer:hover .row {
+    visibility: visible; }
+  .footer:hover h1 {
+    display: none; }
+
 /*# sourceMappingURL=style.css.map */

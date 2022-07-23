@@ -30,6 +30,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -113,6 +114,11 @@ public class TopicsController {
 		}
 		
 		model.addAttribute("list", list);
+		
+		model.addAttribute("hasFooter", true);
+		ResponseEntity<byte[]> entity = s3.download("tags");
+		String body = new String(entity.getBody());
+		model.addAttribute("tags", body.split(System.getProperty("line.separator")));
 		
 		return "topics/index";
 	}

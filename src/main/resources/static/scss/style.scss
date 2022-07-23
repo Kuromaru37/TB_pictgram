@@ -172,6 +172,31 @@ nav.navbar {
 	text-decoration: none;
 }
 
+html {
+	position: relative;
+	min-height: 100%;
+}
+
+body {
+	margin-bottom: 180px;
+}
+
+.footer {
+	background-color: lightyellow;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	left: 0;
+	height: 180px;
+	padding: 10px 0;
+	.row { visibility: hidden;}
+}
 
 
+
+.footer:hover {
+	background-color: lightgreen; 
+	.row {visibility: visible;}
+	h1 {display: none;}
+}
 
